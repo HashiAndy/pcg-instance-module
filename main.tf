@@ -20,6 +20,23 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
+
+data "aws_ami" "centos" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
 resource "aws_instance" "web" {
   ami           = "%{ if var.os == "ubuntu" }${data.aws_ami.ubuntu.id}%{ endif }%{ if var.os == "centos" }${data.aws_ami.centos.id}%{ endif }"
   instance_type = "t2.micro"
