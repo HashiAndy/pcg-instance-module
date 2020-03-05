@@ -7,3 +7,7 @@ variable "tag_ttl" {
 variable "tag_owner" {
   type = string
 }
+variable "os" {
+  type = string
+  default = "ubuntu"
+}
