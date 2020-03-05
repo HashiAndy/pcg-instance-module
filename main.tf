@@ -21,7 +21,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "web" {
-  ami           = data.aws_ami.ubuntu.id
+  ami           = %{ if var.os == "ubuntu" }${data.aws_ami.ubuntu.id}%{ if var.os == "centos" }${data.aws_ami.centos.id}%{ endif }!
   instance_type = "t2.micro"
 
   tags = {
