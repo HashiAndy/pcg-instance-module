@@ -43,7 +43,7 @@ data "aws_ami" "centos" {
 
 resource "aws_instance" "web" {
   ami           = "%{ if var.os == "ubuntu" }${data.aws_ami.ubuntu.id}%{ endif }%{ if var.os == "centos" }${data.aws_ami.centos.id}%{ endif }"
-  instance_type = "t2.large"
+  instance_type = "${var.size}"
 
   tags = {
     Name = "${var.tag_name}"
