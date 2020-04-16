@@ -11,3 +11,7 @@ variable "os" {
   type = string
   default = "ubuntu"
 }
+variable "size" {
+  type = string
+  default = "t2.small"
+}
